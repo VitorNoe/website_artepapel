@@ -25,3 +25,6 @@
 10. Optimize images for web
 
 **Note:** This is a condensed example. The complete solution would include all sections with proper styling, image optimization, and JavaScript for interactive elements.
+
+- Link for the website below:
+https://vitornoe.github.io/website_artepapel/
