@@ -25,7 +25,7 @@ body {
 /* Hero Section */
 .hero {
     height: 100vh;
-    background: url('../images/hero_background.png') center/cover;
+    background: url('images/artepapel_hero_conceitual.png') center/cover;
     position: relative;
 }
 
