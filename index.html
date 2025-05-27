@@ -6,14 +6,644 @@
     <title>ArtePapel Soluções Criativas</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --primary-color: #005f73;
+            --secondary-color: #0a9396;
+            --background-color: #f0f0f0;
+            --text-color: #333333;
+            --cta-color: #ee9b00;
+            --white: #ffffff;
+            --light-gray: #f8f8f8;
+            --animation-timing: 0.5s ease-out;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover img {
+            transform: scale(1.05);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--cta-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%),
+                        url('https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=1920&h=1080&fit=crop') center/cover;
+            background-blend-mode: overlay;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-overlay {
+            background: rgba(0, 0, 0, 0.3);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            font-weight: 700;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            font-weight: 300;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 1.2rem 2.5rem;
+            background-color: var(--cta-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(238,155,0,0.3);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(238,155,0,0.4);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 5rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all var(--animation-timing);
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 3rem;
+            font-weight: 700;
+        }
+
+        /* Quem Somos */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .text-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-color);
+            text-align: justify;
+        }
+
+        .section-image {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .section-image:hover {
+            transform: scale(1.02);
+        }
+
+        /* Products Section */
+        .products {
+            background-color: var(--white);
+            border-radius: 20px;
+            margin: 2rem 0;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .product-card {
+            background: var(--light-gray);
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .product-card i {
+            font-size: 4rem;
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .product-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .product-card p {
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Inspirações Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0,95,115,0.8), rgba(10,147,150,0.8));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        /* Depoimentos */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 4rem;
+            color: var(--cta-color);
+            font-family: serif;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .author-info h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.2rem;
+        }
+
+        .author-info span {
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: 3rem auto 0;
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background-color: var(--cta-color);
+            color: white;
+            padding: 1.2rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .submit-btn:hover {
+            background-color: #d48806;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(238,155,0,0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem 2rem;
+        }
+
+        .social-links {
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            margin: 0 1rem;
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--cta-color);
+            transform: translateY(-3px);
+        }
+
+        .footer p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .modal-content img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--cta-color);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 3rem;
+            }
+            
+            .section-image {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem 3%;
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0,0,0,0.05);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+
+            .section {
+                padding: 3rem 4%;
+            }
+
+            .section h2 {
+                font-size: 2rem;
+            }
+
+            .product-grid,
+            .gallery-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form {
+                margin: 2rem 1rem 0;
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .section {
+                padding: 2rem 3%;
+            }
+
+            .cta-btn {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
     <header class="header">
         <nav class="navbar">
             <a href="#inicio" class="logo">
-                <img src="images/artepapel_logo_conceitual.png" alt="ArtePapel Logo">
+                <img src="https://via.placeholder.com/120x50/005f73/ffffff?text=ArtePapel" alt="ArtePapel Logo">
             </a>
             <ul class="nav-menu">
                 <li><a href="#inicio">Início</a></li>
@@ -23,50 +653,256 @@
                 <li><a href="#depoimentos">Depoimentos</a></li>
                 <li><a href="#contato">Contato</a></li>
             </ul>
+            <button class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
         </nav>
     </header>
 
     <!-- Hero Section -->
     <section id="inicio" class="hero">
-        <div class="hero-overlay">
-            <div class="hero-content">
-                <h1>ArtePapel: Criatividade que Embala Sonhos</h1>
-                <p>Soluções personalizadas em papelaria, embalagens e impressos que encantam e valorizam sua marca.</p>
-                <a href="#produtos" class="cta-btn">Descubra Nossas Criações</a>
-            </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>ArtePapel: Criatividade que Embala Sonhos</h1>
+            <p>Soluções personalizadas em papelaria, embalagens e impressos que encantam e valorizam sua marca.</p>
+            <a href="#produtos" class="cta-btn">Descubra Nossas Criações</a>
         </div>
     </section>
 
     <!-- Quem Somos -->
     <section id="quem-somos" class="section">
-        <div class="container">
-            <h2>Nossa Essência Criativa</h2>
-            <div class="content-grid">
-                <div class="text-content">
-                    <p>A ArtePapel nasceu da paixão por transformar papel em arte e soluções criativas. Com um cuidado artesanal em cada detalhe, buscamos unir design sofisticado à sustentabilidade, utilizando materiais ecológicos e técnicas que preservam o meio ambiente. Nossos produtos são criados para expressar a identidade única de cada cliente, transformando momentos especiais em memórias tangíveis através de papelaria personalizada, embalagens encantadoras e impressos gráficos de alta qualidade.</p>
-                </div>
-                <img src="images/artepapel_quemsomos_conceitual.png" alt="Nosso espaço criativo" class="section-image">
+        <h2>Nossa Essência Criativa</h2>
+        <div class="content-grid">
+            <div class="text-content">
+                <p>A ArtePapel nasceu da paixão por transformar papel em arte e soluções criativas. Com um cuidado artesanal em cada detalhe, buscamos unir design sofisticado à sustentabilidade, utilizando materiais ecológicos e técnicas que preservam o meio ambiente. Nossos produtos são criados para expressar a identidade única de cada cliente, transformando momentos especiais em memórias tangíveis através de papelaria personalizada, embalagens encantadoras e impressos gráficos de alta qualidade. Valorizamos o toque humano em um mundo cada vez mais digital, oferecendo soluções que contam histórias e criam conexões genuínas.</p>
             </div>
+            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&h=400&fit=crop" 
+                alt="Nosso espaço criativo" 
+                class="section-image">
         </div>
     </section>
 
     <!-- Nossos Produtos -->
     <section id="produtos" class="section products">
-        <div class="container">
-            <h2>Transformando Ideias em Realidade</h2>
-            <div class="product-grid">
-                <div class="product-card">
-                    <img src="images/artepapel_logo_conceitual.png" alt="Papelaria Personalizada">
-                    <h3>Papelaria Personalizada</h3>
-                    <p>Criamos convites, cartões, planners, cadernos e uma variedade de itens de papelaria com design exclusivo para seus momentos e sua marca.</p>
-                </div>
-                <!-- Repeat for other products -->
+        <h2>Transformando Ideias em Realidade</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <i class="fas fa-pen-fancy"></i>
+                <h3>Papelaria Personalizada</h3>
+                <p>Criamos convites, cartões, planners, cadernos e uma variedade de itens de papelaria com design exclusivo para seus momentos e sua marca.</p>
+            </div>
+            <div class="product-card">
+                <i class="fas fa-gift"></i>
+                <h3>Embalagens Criativas</h3>
+                <p>Desenvolvemos embalagens customizadas que protegem, encantam e agregam valor incomparável aos seus produtos e presentes.</p>
+            </div>
+            <div class="product-card">
+                <i class="fas fa-print"></i>
+                <h3>Impressos Gráficos</h3>
+                <p>Produzimos flyers, catálogos, cartões de visita e outros materiais promocionais com design sofisticado e impressão de alta qualidade.</p>
             </div>
         </div>
     </section>
 
-    <!-- Restante das seções -->
+    <!-- Inspirações -->
+    <section id="inspiracoes" class="section">
+        <h2>Nossas Criações em Destaque</h2>
+        <div class="gallery-grid">
+            <a href="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=600&h=400&fit=crop" class="gallery-item" onclick="openModal(this.href)">
+                <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=300&h=250&fit=crop" alt="Convite de casamento elegante">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </a>
+            <a href="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=600&h=400&fit=crop" class="gallery-item" onclick="openModal(this.href)">
+                <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=300&h=250&fit=crop" alt="Embalagem luxury">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </a>
+            <a href="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop" class="gallery-item" onclick="openModal(this.href)">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=250&fit=crop" alt="Caderno artesanal">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </a>
+            <a href="https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=600&h=400&fit=crop" class="gallery-item" onclick="openModal(this.href)">
+                <img src="https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=300&h=250&fit=crop" alt="Identidade visual">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </a>
+            <a href="https://images.unsplash.com/photo-1549298916-f52d724204b4?w=600&h=400&fit=crop" class="gallery-item" onclick="openModal(this.href)">
+                <img src="https://images.unsplash.com/photo-1549298916-f52d724204b4?w=300&h=250&fit=crop" alt="Sacola personalizada">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </a>
+            <a href="https://images.unsplash.com/photo-1542435503-956c469947f6?w=600&h=400&fit=crop" class="gallery-item" onclick="openModal(this.href)">
+                <img src="https://images.unsplash.com/photo-1542435503-956c469947f6?w=300&h=250&fit=crop" alt="Catálogo premium">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </a>
+            </div>
+        </div>
+    </section>
 
-    <script src="js/script.js"></script>
+    <!-- Depoimentos -->
+    <section id="depoimentos" class="section">
+        <h2>O que Nossos Clientes Contam</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-text">A ArtePapel transformou completamente nossa identidade visual. Os convites do nosso casamento ficaram simplesmente perfeitos, com um acabamento artesanal que encantou todos os convidados.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">MC</div>
+                    <div class="author-info">
+                        <h4>Marina & Carlos</h4>
+                        <span>Casal de noivos</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">Trabalhar com a ArtePapel foi uma experiência incrível. Eles entenderam perfeitamente nossa visão e criaram embalagens que agregaram muito valor aos nossos produtos. Recomendo sem hesitar!</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">AS</div>
+                    <div class="author-info">
+                        <h4>Ana Silva</h4>
+                        <span>Bella Cosméticos</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">O profissionalismo e a criatividade da equipe superaram nossas expectativas. Nossos materiais promocionais ficaram elegantes e impactantes, refletindo perfeitamente nossa marca.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">RS</div>
+                    <div class="author-info">
+                        <h4>Roberto Santos</h4>
+                        <span>Escritório de Advocacia</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contato" class="section">
+        <h2>Fale com a ArtePapel</h2>
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+            <div class="form-group">
+                <label for="nome">Nome Completo</label>
+                <input type="text" id="nome" name="nome" required>
+            </div>
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="assunto">Assunto</label>
+                <input type="text" id="assunto" name="assunto" required>
+            </div>
+            <div class="form-group">
+                <label for="mensagem">Mensagem</label>
+                <textarea id="mensagem" name="mensagem" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Enviar Mensagem</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="social-links">
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+            <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <p>&copy; 2025 ArtePapel Soluções Criativas. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Modal -->
+    <div id="imageModal" class="modal">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="">
+        </div>
+    </div>
+
+    <script>
+        // Animação ao scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observar todas as seções
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Smooth scroll para navegação
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if(target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Modal
+        function openModal(imageSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            modalImage.src = imageSrc;
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.style.display = 'none';
+        }
+        // Fechar modal ao clicar fora da imagem
+        window.onclick = function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target == modal) {
+                closeModal();
+            }    
+        }
+        // Manipulação do menu mobile
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        mobileMenuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        // Envio do formulário
+        function handleSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            // Aqui você pode enviar os dados do formulário para o servidor
+            console.log('Formulário enviado:', Object.fromEntries(formData.entries()));
+            alert('Mensagem enviada com sucesso!');
+            form.reset();
+        }
+        // Fechar menu ao clicar em um link
+        const navLinks = document.querySelectorAll('.nav-menu a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>
