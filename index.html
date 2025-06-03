@@ -6,6 +6,8 @@
     <title>ArtePapel Soluções Criativas</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/scripts.js" defer></script>
     <style>
         :root {
             --primary-color: #005f73;
@@ -109,7 +111,7 @@
         .hero {
             height: 100vh;
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%),
-                        url('https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=1920&h=1080&fit=crop') center/cover;
+                        url("images/artepapel_hero_conceitual.png") center/cover;
             background-blend-mode: overlay;
             position: relative;
             display: flex;
@@ -223,7 +225,8 @@
         .products {
             background-color: var(--white);
             border-radius: 20px;
-            margin: 2rem 0;
+            margin: 2rem auto;
+            width: fit-content;
             box-shadow: 0 5px 25px rgba(0,0,0,0.05);
         }
 
@@ -232,6 +235,7 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 3rem;
             margin-top: 3rem;
+            justify-content: center;
         }
 
         .product-card {
@@ -643,7 +647,7 @@
     <header class="header">
         <nav class="navbar">
             <a href="#inicio" class="logo">
-                <img src="https://via.placeholder.com/120x50/005f73/ffffff?text=ArtePapel" alt="ArtePapel Logo">
+                <img src="images/artepapel_logo_conceitual.png" alt="ArtePapel Logo" style="width: 125px; height: auto;">
             </a>
             <ul class="nav-menu">
                 <li><a href="#inicio">Início</a></li>
@@ -676,7 +680,7 @@
             <div class="text-content">
                 <p>A ArtePapel nasceu da paixão por transformar papel em arte e soluções criativas. Com um cuidado artesanal em cada detalhe, buscamos unir design sofisticado à sustentabilidade, utilizando materiais ecológicos e técnicas que preservam o meio ambiente. Nossos produtos são criados para expressar a identidade única de cada cliente, transformando momentos especiais em memórias tangíveis através de papelaria personalizada, embalagens encantadoras e impressos gráficos de alta qualidade. Valorizamos o toque humano em um mundo cada vez mais digital, oferecendo soluções que contam histórias e criam conexões genuínas.</p>
             </div>
-            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&h=400&fit=crop" 
+            <img src="images/artepapel_quemsomos_conceitual.png" 
                 alt="Nosso espaço criativo" 
                 class="section-image">
         </div>
@@ -689,17 +693,17 @@
             <div class="product-card">
                 <i class="fas fa-pen-fancy"></i>
                 <h3>Papelaria Personalizada</h3>
-                <p>Criamos convites, cartões, planners, cadernos e uma variedade de itens de papelaria com design exclusivo para seus momentos e sua marca.</p>
+                <p>Criamos convites, cartões, planners, cadernos e uma variedade de itens de papelaria com design exclusivo para seus momentos e sua marca. Nossos produtos são feitos com amor e cuidado, garantindo um toque humano em cada detalhe.</p>
             </div>
             <div class="product-card">
                 <i class="fas fa-gift"></i>
                 <h3>Embalagens Criativas</h3>
-                <p>Desenvolvemos embalagens customizadas que protegem, encantam e agregam valor incomparável aos seus produtos e presentes.</p>
+                <p>Desenvolvemos embalagens customizadas que protegem, encantam e agregam valor incomparável aos seus produtos e presentes. Nossas embalagens são feitas com materiais ecológicos e são projetadas para serem reutilizadas.</p>
             </div>
             <div class="product-card">
                 <i class="fas fa-print"></i>
                 <h3>Impressos Gráficos</h3>
-                <p>Produzimos flyers, catálogos, cartões de visita e outros materiais promocionais com design sofisticado e impressão de alta qualidade.</p>
+                <p>Produzimos flyers, catálogos, cartões de visita e outros materiais promocionais com design sofisticado e impressão de alta qualidade. Nossos impressos gráficos são feitos com amor e atenção ao detalhe, garantindo um produto de alta qualidade.</p>
             </div>
         </div>
     </section>
